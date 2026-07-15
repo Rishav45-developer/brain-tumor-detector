@@ -24,14 +24,13 @@ build a table of image filepaths and labels. Confirmed the dataset:
 all four classes (1,400 images each).
 
 **Day 5** — Created a GitHub repository and connected it to the local
-project. Resolved a merge conflict caused by an auto-generated LICENSE
-file on GitHub, using `git pull --allow-unrelated-histories`.
+project.
 
 **Day 6** — Evaluated two approaches for exploratory data analysis:
-Jupyter notebooks versus standalone Python scripts. Selected the script-based
-approach for this project, as it integrates more reliably with the existing
-virtual environment setup and keeps the development workflow consistent
-across all stages of the pipeline.
+Jupyter notebooks versus standalone Python scripts. Selected the
+script-based approach for this project, as it integrates more reliably
+with the existing virtual environment setup and keeps the development
+workflow consistent across all stages of the pipeline.
 
 **Day 7** — Wrote `src/eda.py` to explore the dataset: plotted the class
 distribution, viewed sample MRI images from each class, and checked image
@@ -57,31 +56,22 @@ dimensions across a random sample. Saved the generated charts to `reports/`.
 
 ![Sample images](./sample_images.png)
 
-## Problems faced & how I solved them
+## Engineering Decisions
 
-- **PowerShell vs. Linux command syntax** — initial `mkdir -p` / `mv`
-  commands failed since they're Linux/Mac syntax; switched to PowerShell
-  equivalents (`New-Item`, `Move-Item`).
-- **Interrupted pip install** — an early `pip install -r requirements.txt`
-  got interrupted mid-download; re-ran it cleanly with the venv active.
-- **Git merge conflict** — GitHub auto-generated a LICENSE file that
-  didn't exist locally, causing a rejected push; resolved with
-  `git pull origin main --allow-unrelated-histories` and completed the merge.
-- **Notebook kernel mismatch** — Jupyter notebook was running system Python
-  instead of the project venv, causing `ModuleNotFoundError: No module
-  named 'cv2'` even though the package was installed correctly in the venv.
-  Switched to a plain `.py` script (`src/eda.py`) to avoid the kernel
-  selection issue entirely.
-
-## What I'd do differently
-
-_(fill in — a couple of honest reflections, e.g.: would you set up the
-venv/kernel connection first before creating the notebook next time?
-Would you check PowerShell syntax before running commands? Anything that
-took longer than it should have?)_
+- Used a Python virtual environment to isolate project dependencies from
+  the system Python installation.
+- Chose a script-based workflow over notebooks for the exploratory
+  analysis stage, to keep dependency resolution consistent across the
+  project's virtual environment throughout the pipeline.
+- Structured the repository with clear separation between raw data,
+  source code, and generated reports, following standard ML project
+  conventions.
+- Kept raw dataset files out of version control, tracking only code and
+  small generated artifacts (charts, reports) in git.
 
 ## Plan for next week
 
-Week 2: build the preprocessing pipeline — train/validation split
-(stratified, to preserve class balance), image resizing and normalization,
-and a PyTorch `Dataset`/`DataLoader` class to feed images into the model.
+Week 2: build the preprocessing pipeline — deduplicate the dataset,
+train/validation split (stratified, to preserve class balance), image
+resizing and normalization, and a PyTorch `Dataset`/`DataLoader` class to
+feed images into the model.
