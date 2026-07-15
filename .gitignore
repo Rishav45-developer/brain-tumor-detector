@@ -2,6 +2,7 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+!data/processed/*.csv
 models/*
 !models/.gitkeep
 kaggle.json
