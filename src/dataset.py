@@ -1,8 +1,6 @@
-
-
 import pandas as pd
 from PIL import Image
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 
 
@@ -52,3 +50,13 @@ if __name__ == "__main__":
     image, label = train_ds[0]
     print(f"\nSample image tensor shape: {image.shape}")
     print(f"Sample label: {label}")
+
+    # Wrap datasets in DataLoaders so images are grouped into batches
+    # and fed to the model together, instead of one at a time.
+    train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
+    val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
+
+    # Pull one batch to confirm everything works end-to-end
+    images, labels = next(iter(train_loader))
+    print(f"\nBatch of images shape: {images.shape}")
+    print(f"Batch of labels shape: {labels.shape}")
