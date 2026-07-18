@@ -13,17 +13,17 @@ class SimpleCNN(nn.Module):
             # Block 1: 3 -> 32 channels
             nn.Conv2d(3, 32, kernel_size=3, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 224x224 -> 112x112
+            nn.MaxPool2d(2), 
 
             # Block 2: 32 -> 64 channels
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 112x112 -> 56x56
+            nn.MaxPool2d(2),  
 
             # Block 3: 64 -> 128 channels
             nn.Conv2d(64, 128, kernel_size=3, padding=1),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 56x56 -> 28x28
+            nn.MaxPool2d(2),  
         )
 
         # Classification head: takes the extracted features and
